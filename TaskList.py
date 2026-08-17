@@ -1,6 +1,5 @@
 import json
-
-
+from flask import Flask
 
 
 class Task:
