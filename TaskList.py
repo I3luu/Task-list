@@ -41,12 +41,13 @@ class TaskList:
             self.tasks.append(new_task)
 
 
-my_list = TaskList()
-my_list.add_task("buy milk")
-my_list.add_task("walk dog")
-my_list.save_to_file("tasks.json")
+if __name__ == "__main__":
+    my_list = TaskList()
+    my_list.add_task("buy milk")
+    my_list.add_task("walk dog")
+    my_list.save_to_file("tasks.json")
 
-new_list = TaskList()
-new_list.load_from_file("tasks.json")
-new_list.show_tasks()
+    new_list = TaskList()
+    new_list.load_from_file("tasks.json")
+    new_list.show_tasks()
 

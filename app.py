@@ -4,8 +4,11 @@ from TaskList import TaskList
 
 app = Flask(__name__)
 my_list = TaskList()
-my_list.add_task("Walk the dogs")
-my_list.add_task("Learn python")  
+
+try:
+    my_list.load_from_file("tasks.json")
+except FileNotFoundError:
+    pass
 
 @app.route("/")
 def index():
@@ -15,16 +18,19 @@ def index():
 def add():
     title = request.form["title"]
     my_list.add_task(title)
+    my_list.save_to_file("tasks.json")
     return redirect("/")
 
 @app.route("/complete/<int:index>", methods=["POST"])
 def complete(index):
     my_list.complete_task(index)
+    my_list.save_to_file("tasks.json")
     return redirect("/")
 
 @app.route("/delete/<int:index>", methods=["POST"])
 def delete(index):
     my_list.delete_task(index)
+    my_list.save_to_file("tasks.json")
     return redirect("/")
 
 if __name__ == "__main__":

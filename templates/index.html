@@ -1,19 +1,34 @@
-<form action="/add" method="POST">
-<input type="text" name="title" placeholder="New Task">
-<button type="submit">Add</button>
-</form>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My To-Do List</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div id="header">
+        <h1>The Never Ending List Of Tasks</h1>
+    </div>
 
+    <div id="form-container">
+        <form action="/add" method="POST">
+            <input type="text" name="title" placeholder="New Task">
+            <button type="submit">Add</button>
+        </form>
+    </div>
 
-<ul>
-    {% for task in tasks %}
-        <li>
-            {{ task.title }} - {{ task.done }}
-            <form action="/complete/{{ loop.index0 }}" method="POST" style="display:inline">
-                <button type="submit">Complete</button>
-            </form>
-            <form action="/delete/{{ loop.index0 }}" method="POST" style="display:inline">
-                <button type="submit">Delete</button>
-            </form>
-        </li>
-    {% endfor %}
-</ul>
+    <ul>
+        {% for task in tasks %}
+            <li>
+                {{ task.title }} - {{ task.done }}
+                <form action="/complete/{{ loop.index0 }}" method="POST" style="display:inline">
+                    <button type="submit">Complete</button>
+                </form>
+                <form action="/delete/{{ loop.index0 }}" method="POST" style="display:inline">
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
